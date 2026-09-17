@@ -28,7 +28,10 @@ concurrency:
 
 env:
   CLIENT_REPOSITORY: mana/mana
-  CLIENT_REF: wasm
+  # The branch to build. A client-updated dispatch names the branch it was
+  # sent for; otherwise this default applies (change it once the browser
+  # build has merged into master).
+  CLIENT_REF: ${{ github.event.client_payload.ref || 'wasm' }}
   EMSDK_VERSION: 5.0.1
   # Where Emscripten keeps its built ports and system libraries
   EM_CACHE: ${{ github.workspace }}/.em-cache
